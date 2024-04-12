@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Inizializzo i contatori per le risposte A e B
-count_sottotono_A = 0 
+count_sottotono_A = 0
 count_sottotono_B = 0
 count_contrasto_A = 0
 count_contrasto_B = 0
@@ -12,7 +12,13 @@ contrasto = ""
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    global count_sottotono_A, count_sottotono_B, count_contrasto_A, count_contrasto_B
+    count_sottotono_A = 0
+    count_sottotono_B = 0
+    count_contrasto_A = 0
+    count_contrasto_B = 0
     return 'OK', 200
+
 
 # Funzione per determinare il sottotono della pelle in base alle risposte A e B
 def determina_sottotono(data):
@@ -75,53 +81,53 @@ def dialogflow():
     global count_sottotono_A, count_sottotono_B, sottotono
     global count_contrasto_A, count_contrasto_B, contrasto
 
-    data = request.get_json() # get data from dialogflow
-
-    # Reimposto i contatori delle risposte A e B a zero all'inizio di ogni richiesta
-    count_sottotono_A = 0
-    count_sottotono_B = 0
-    count_contrasto_A = 0
-    count_contrasto_B = 0
-
-    sottotono = ""
-    contrasto = ""
+    data = request.get_json()  # get data from dialogflow
     
-    # Determino il sottotono della pelle
-    sottotono = determina_sottotono(data)
+    # Stampare i valori dei parametri sul terminale
+    for i in range(1, 6):
+        param_name = f"sottotono_risposta_{i}"
+        print(f"{param_name}: {data['sessionInfo']['parameters'].get(param_name, 'Non disponibile')}")
+    for i in range(6, 9):
+        param_name = f"contrasto_risposta_{i}"
+        print(f"{param_name}: {data['sessionInfo']['parameters'].get(param_name, 'Non disponibile')}")
+
+    # Determino il sottotono della pelle solo se non è già stato determinato
+    if not sottotono:
+        sottotono = determina_sottotono(data)
 
     # Se il sottotono è stato determinato e il contrasto non è ancora stato determinato, chiedo la domanda sul contrasto
-    if sottotono != "" and contrasto == "":
+    if sottotono and not contrasto and all(data['sessionInfo']['parameters'].get(f'contrasto_risposta_{i}', '') == '' for i in range(6, 9)):
         return jsonify({
-            "fulfillmentResponse": {
-                "messages": [
-                    {
-                        "text": {
-                            "text": [f"Il sottotono della tua pelle è {sottotono}. \n" 
-                                     + "Ora scopriamo se il tuo contrasto è alto o basso! \n\n" 
-                                     + "6. Di che colore sono i tuoi occhi? \n\n" 
-                                     + "A) Nocciola o marrone \n" 
-                                     + "B) Blu, verdi o grigi \n"]
-                        }
+        "fulfillmentResponse": {
+            "messages": [
+                {
+                    "text": {
+                        "text": [f"Il sottotono della tua pelle è {sottotono}. \n"
+                                 + "Ora scopriamo se il tuo contrasto è alto o basso! \n\n"
+                                 + "6. Di che colore sono i tuoi occhi? \n\n"
+                                 + "A) Nocciola o marrone \n"
+                                 + "B) Blu, verdi o grigi \n"]
                     }
-                ]
-            }
-        })
+                }
+            ]
+        }
+    })
 
     # Se il contrasto non è ancora stato determinato, lo determino
-    if contrasto == "":
+    if sottotono and not contrasto:
         contrasto = determina_contrasto(data)
 
     # Se sia il sottotono che il contrasto sono stati determinati, determino la stagione cromatica
-    if sottotono != "" and contrasto != "":
+    if sottotono and contrasto:
         stagione = determina_stagione(sottotono, contrasto)
         return jsonify({
             "fulfillmentResponse": {
                 "messages": [
                     {
                         "text": {
-                            "text": [f"Il sottotono della tua pelle è {sottotono}. \n" 
-                                     + f"Il tuo contrasto è {contrasto}. \n" 
-                                     + f"La tua stagione cromatica è {stagione}."]
+                            "text": [f"Prima abbiamo visto che il sottotono della tua pelle è {sottotono}. \n\n"
+                                     + f"Ora abbiamo stabilito che il tuo contrasto è {contrasto}. \n"
+                                     + f"Quindi, la tua stagione cromatica è {stagione}."]
                         }
                     }
                 ]
@@ -131,7 +137,9 @@ def dialogflow():
     # Se non siamo ancora all'ultima domanda, restituiamo una risposta vuota
     return jsonify({})
 
+
 # avvio del server
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
+
 
