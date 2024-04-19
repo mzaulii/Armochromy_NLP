@@ -1,0 +1,171 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2758
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red183\green111\blue179;\red24\green24\blue24;\red193\green193\blue193;
+\red67\green192\blue160;\red140\green211\blue254;\red212\green214\blue154;\red202\green202\blue202;\red89\green138\blue67;
+\red167\green197\blue152;\red194\green126\blue101;\red70\green137\blue204;\red205\green173\blue106;}
+{\*\expandedcolortbl;;\cssrgb\c77255\c52549\c75294;\cssrgb\c12157\c12157\c12157;\cssrgb\c80000\c80000\c80000;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c61176\c86275\c99608;\cssrgb\c86275\c86275\c66667;\cssrgb\c83137\c83137\c83137;\cssrgb\c41569\c60000\c33333;
+\cssrgb\c70980\c80784\c65882;\cssrgb\c80784\c56863\c47059;\cssrgb\c33725\c61176\c83922;\cssrgb\c84314\c72941\c49020;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 from\cf4 \strokec4  \cf5 \strokec5 flask\cf4 \strokec4  \cf2 \strokec2 import\cf4 \strokec4  \cf5 \strokec5 Flask\cf4 \strokec4 , \cf6 \strokec6 request\cf4 \strokec4 , \cf7 \strokec7 jsonify\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 app\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf5 \strokec5 Flask\cf4 \strokec4 (\cf6 \strokec6 __name__\cf4 \strokec4 )\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # Inizializzo i contatori per le risposte A e B\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb3 \strokec6 count_sottotono_A\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cf6 \cb3 \strokec6 count_sottotono_B\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cf6 \cb3 \strokec6 count_contrasto_A\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cf6 \cb3 \strokec6 count_contrasto_B\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cf6 \cb3 \strokec6 sottotono\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf11 \strokec11 ""\cf4 \cb1 \strokec4 \
+\cf6 \cb3 \strokec6 contrasto\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf11 \strokec11 ""\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb3 \strokec7 @\cf6 \strokec6 app\cf7 \strokec7 .route\cf4 \strokec4 (\cf11 \strokec11 '/'\cf4 \strokec4 , \cf6 \strokec6 methods\cf8 \strokec8 =\cf4 \strokec4 [\cf11 \strokec11 'GET'\cf4 \strokec4 , \cf11 \strokec11 'POST'\cf4 \strokec4 ])\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf12 \cb3 \strokec12 def\cf4 \strokec4  \cf7 \strokec7 home\cf4 \strokec4 ():\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf12 \strokec12 global\cf4 \strokec4  \cf6 \strokec6 count_sottotono_A\cf4 \strokec4 , \cf6 \strokec6 count_sottotono_B\cf4 \strokec4 , \cf6 \strokec6 count_contrasto_A\cf4 \strokec4 , \cf6 \strokec6 count_contrasto_B\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 count_sottotono_A\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 count_sottotono_B\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 count_contrasto_A\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cb3     \cf6 \strokec6 count_contrasto_B\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf10 \strokec10 0\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 'OK'\cf4 \strokec4 , \cf10 \strokec10 200\cf4 \cb1 \strokec4 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # Funzione per determinare il sottotono della pelle in base alle risposte A e B\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf12 \cb3 \strokec12 def\cf4 \strokec4  \cf7 \strokec7 determina_sottotono\cf4 \strokec4 (\cf6 \strokec6 data\cf4 \strokec4 ):\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf12 \strokec12 global\cf4 \strokec4  \cf6 \strokec6 count_sottotono_A\cf4 \strokec4 , \cf6 \strokec6 count_sottotono_B\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf11 \strokec11 'sessionInfo'\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf11 \strokec11 'parameters'\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4 [\cf11 \strokec11 'sessionInfo'\cf4 \strokec4 ]:\cb1 \
+\cb3         \cf6 \strokec6 parameters\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4 [\cf11 \strokec11 'sessionInfo'\cf4 \strokec4 ][\cf11 \strokec11 'parameters'\cf4 \strokec4 ]\cb1 \
+\cb3         \cf2 \strokec2 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf2 \strokec2 in\cf4 \strokec4  \cf5 \strokec5 range\cf4 \strokec4 (\cf10 \strokec10 1\cf4 \strokec4 , \cf10 \strokec10 6\cf4 \strokec4 ):  \cf9 \strokec9 # Itero su tutte le domande del flusso sottotono\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 param_name\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf12 \strokec12 f\cf11 \strokec11 "sottotono_risposta_\cf12 \strokec12 \{\cf6 \strokec6 i\cf12 \strokec12 \}\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3             \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 param_name\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 parameters\cf4 \strokec4 :\cb1 \
+\cb3                 \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf6 \strokec6 parameters\cf4 \strokec4 [\cf6 \strokec6 param_name\cf4 \strokec4 ].strip().lower()\cb1 \
+\cb3                 \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'a'\cf4 \strokec4  \cf12 \strokec12 or\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'risposta a'\cf4 \strokec4 :\cb1 \
+\cb3                     \cf6 \strokec6 count_sottotono_A\cf4 \strokec4  \cf8 \strokec8 +=\cf4 \strokec4  \cf10 \strokec10 1\cf4 \cb1 \strokec4 \
+\cb3                 \cf2 \strokec2 elif\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'b'\cf4 \strokec4  \cf12 \strokec12 or\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'risposta b'\cf4 \strokec4 :\cb1 \
+\cb3                     \cf6 \strokec6 count_sottotono_B\cf4 \strokec4  \cf8 \strokec8 +=\cf4 \strokec4  \cf10 \strokec10 1\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 count_sottotono_A\cf4 \strokec4  \cf8 \strokec8 >\cf4 \strokec4  \cf6 \strokec6 count_sottotono_B\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "caldo"\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 elif\cf4 \strokec4  \cf6 \strokec6 count_sottotono_B\cf4 \strokec4  \cf8 \strokec8 >\cf4 \strokec4  \cf6 \strokec6 count_sottotono_A\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "freddo"\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "non \'e8 possibile determinare"\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # Funzione per determinare il contrasto in base alle risposte A e B\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf12 \cb3 \strokec12 def\cf4 \strokec4  \cf7 \strokec7 determina_contrasto\cf4 \strokec4 (\cf6 \strokec6 data\cf4 \strokec4 ):\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf12 \strokec12 global\cf4 \strokec4  \cf6 \strokec6 count_contrasto_A\cf4 \strokec4 , \cf6 \strokec6 count_contrasto_B\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf11 \strokec11 'sessionInfo'\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf11 \strokec11 'parameters'\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4 [\cf11 \strokec11 'sessionInfo'\cf4 \strokec4 ]:\cb1 \
+\cb3         \cf6 \strokec6 parameters\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf6 \strokec6 data\cf4 \strokec4 [\cf11 \strokec11 'sessionInfo'\cf4 \strokec4 ][\cf11 \strokec11 'parameters'\cf4 \strokec4 ]\cb1 \
+\cb3         \cf2 \strokec2 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf2 \strokec2 in\cf4 \strokec4  \cf5 \strokec5 range\cf4 \strokec4 (\cf10 \strokec10 6\cf4 \strokec4 , \cf10 \strokec10 9\cf4 \strokec4 ):  \cf9 \strokec9 # Itero su tutte le domande del flusso contrasto\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 param_name\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf12 \strokec12 f\cf11 \strokec11 "contrasto_risposta_\cf12 \strokec12 \{\cf6 \strokec6 i\cf12 \strokec12 \}\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3             \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 param_name\cf4 \strokec4  \cf12 \strokec12 in\cf4 \strokec4  \cf6 \strokec6 parameters\cf4 \strokec4 :\cb1 \
+\cb3                 \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf6 \strokec6 parameters\cf4 \strokec4 [\cf6 \strokec6 param_name\cf4 \strokec4 ].strip().lower()\cb1 \
+\cb3                 \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'a'\cf4 \strokec4  \cf12 \strokec12 or\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'risposta a'\cf4 \strokec4 :\cb1 \
+\cb3                     \cf6 \strokec6 count_contrasto_A\cf4 \strokec4  \cf8 \strokec8 +=\cf4 \strokec4  \cf10 \strokec10 1\cf4 \cb1 \strokec4 \
+\cb3                 \cf2 \strokec2 elif\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'b'\cf4 \strokec4  \cf12 \strokec12 or\cf4 \strokec4  \cf6 \strokec6 value\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 'risposta b'\cf4 \strokec4 :\cb1 \
+\cb3                     \cf6 \strokec6 count_contrasto_B\cf4 \strokec4  \cf8 \strokec8 +=\cf4 \strokec4  \cf10 \strokec10 1\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 count_contrasto_A\cf4 \strokec4  \cf8 \strokec8 >\cf4 \strokec4  \cf6 \strokec6 count_contrasto_B\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "basso"\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 elif\cf4 \strokec4  \cf6 \strokec6 count_contrasto_B\cf4 \strokec4  \cf8 \strokec8 >\cf4 \strokec4  \cf6 \strokec6 count_contrasto_A\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "medio/intenso"\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "non \'e8 possibile determinare"\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # Funzione per determinare la stagione cromatica in base al sottotono e al contrasto\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf12 \cb3 \strokec12 def\cf4 \strokec4  \cf7 \strokec7 determina_stagione\cf4 \strokec4 (\cf6 \strokec6 sottotono\cf4 \strokec4 , \cf6 \strokec6 contrasto\cf4 \strokec4 ):\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 sottotono\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 "caldo"\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 contrasto\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 "basso"\cf4 \strokec4 :\cb1 \
+\cb3             \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "Primavera"\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 else\cf4 \strokec4 :\cb1 \
+\cb3             \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "Autunno"\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \strokec4 :\cb1 \
+\cb3         \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 contrasto\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 "basso"\cf4 \strokec4 :\cb1 \
+\cb3             \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "Estate"\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 else\cf4 \strokec4 :\cb1 \
+\cb3             \cf2 \strokec2 return\cf4 \strokec4  \cf11 \strokec11 "Inverno"\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # endpoint per gestire le richieste di dialogflow\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb3 \strokec7 @\cf6 \strokec6 app\cf7 \strokec7 .route\cf4 \strokec4 (\cf11 \strokec11 '/dialogflow'\cf4 \strokec4 , \cf6 \strokec6 methods\cf8 \strokec8 =\cf4 \strokec4 [\cf11 \strokec11 'POST'\cf4 \strokec4 ])\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf12 \cb3 \strokec12 def\cf4 \strokec4  \cf7 \strokec7 dialogflow\cf4 \strokec4 ():\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf12 \strokec12 global\cf4 \strokec4  \cf6 \strokec6 count_sottotono_A\cf4 \strokec4 , \cf6 \strokec6 count_sottotono_B\cf4 \strokec4 , \cf6 \strokec6 sottotono\cf4 \cb1 \strokec4 \
+\cb3     \cf12 \strokec12 global\cf4 \strokec4  \cf6 \strokec6 count_contrasto_A\cf4 \strokec4 , \cf6 \strokec6 count_contrasto_B\cf4 \strokec4 , \cf6 \strokec6 contrasto\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf6 \strokec6 data\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf6 \strokec6 request\cf4 \strokec4 .\cf7 \strokec7 get_json\cf4 \strokec4 ()  \cf9 \strokec9 # get data from dialogflow\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf9 \strokec9 # Determino il sottotono della pelle solo se non \'e8 gi\'e0 stato determinato\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf12 \strokec12 not\cf4 \strokec4  \cf6 \strokec6 sottotono\cf4 \strokec4 :\cb1 \
+\cb3         \cf6 \strokec6 sottotono\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf7 \strokec7 determina_sottotono\cf4 \strokec4 (\cf6 \strokec6 data\cf4 \strokec4 )\cb1 \
+\
+\cb3     \cf9 \strokec9 # Se il sottotono \'e8 stato determinato e il contrasto non \'e8 ancora stato determinato, chiedo la domanda sul contrasto\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 sottotono\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf12 \strokec12 not\cf4 \strokec4  \cf6 \strokec6 contrasto\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf7 \strokec7 all\cf4 \strokec4 (\cf6 \strokec6 data\cf4 \strokec4 [\cf11 \strokec11 'sessionInfo'\cf4 \strokec4 ][\cf11 \strokec11 'parameters'\cf4 \strokec4 ].get(\cf12 \strokec12 f\cf11 \strokec11 'contrasto_risposta_\cf12 \strokec12 \{\cf6 \strokec6 i\cf12 \strokec12 \}\cf11 \strokec11 '\cf4 \strokec4 , \cf11 \strokec11 ''\cf4 \strokec4 ) \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 ''\cf4 \strokec4  \cf2 \strokec2 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf2 \strokec2 in\cf4 \strokec4  \cf5 \strokec5 range\cf4 \strokec4 (\cf10 \strokec10 6\cf4 \strokec4 , \cf10 \strokec10 9\cf4 \strokec4 )):\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf7 \strokec7 jsonify\cf4 \strokec4 (\{\cb1 \
+\cb3         \cf11 \strokec11 "fulfillmentResponse"\cf4 \strokec4 : \{\cb1 \
+\cb3             \cf11 \strokec11 "messages"\cf4 \strokec4 : [\cb1 \
+\cb3                 \{\cb1 \
+\cb3                     \cf11 \strokec11 "text"\cf4 \strokec4 : \{\cb1 \
+\cb3                         \cf11 \strokec11 "text"\cf4 \strokec4 : [\cf12 \strokec12 f\cf11 \strokec11 "Il sottotono della tua pelle \'e8 \cf12 \strokec12 \{\cf6 \strokec6 sottotono\cf12 \strokec12 \}\cf11 \strokec11 . \cf13 \strokec13 \\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                  \cf8 \strokec8 +\cf4 \strokec4  \cf11 \strokec11 "Ora scopriamo se il tuo contrasto \'e8 alto o basso! \cf13 \strokec13 \\n\\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                  \cf8 \strokec8 +\cf4 \strokec4  \cf11 \strokec11 "6. Di che colore sono i tuoi occhi? \cf13 \strokec13 \\n\\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                  \cf8 \strokec8 +\cf4 \strokec4  \cf11 \strokec11 "A) Nocciola o marrone \cf13 \strokec13 \\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                  \cf8 \strokec8 +\cf4 \strokec4  \cf11 \strokec11 "B) Blu, verdi o grigi \cf13 \strokec13 \\n\cf11 \strokec11 "\cf4 \strokec4 ]\cb1 \
+\cb3                     \}\cb1 \
+\cb3                 \}\cb1 \
+\cb3             ]\cb1 \
+\cb3         \}\cb1 \
+\cb3     \})\cb1 \
+\
+\cb3     \cf9 \strokec9 # Se il contrasto non \'e8 ancora stato determinato, lo determino\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 sottotono\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf12 \strokec12 not\cf4 \strokec4  \cf6 \strokec6 contrasto\cf4 \strokec4 :\cb1 \
+\cb3         \cf6 \strokec6 contrasto\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf7 \strokec7 determina_contrasto\cf4 \strokec4 (\cf6 \strokec6 data\cf4 \strokec4 )\cb1 \
+\
+\cb3     \cf9 \strokec9 # Se sia il sottotono che il contrasto sono stati determinati, determino la stagione cromatica\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 sottotono\cf4 \strokec4  \cf12 \strokec12 and\cf4 \strokec4  \cf6 \strokec6 contrasto\cf4 \strokec4 :\cb1 \
+\cb3         \cf6 \strokec6 stagione\cf4 \strokec4  \cf8 \strokec8 =\cf4 \strokec4  \cf7 \strokec7 determina_stagione\cf4 \strokec4 (\cf6 \strokec6 sottotono\cf4 \strokec4 , \cf6 \strokec6 contrasto\cf4 \strokec4 )\cb1 \
+\cb3         \cf2 \strokec2 return\cf4 \strokec4  \cf7 \strokec7 jsonify\cf4 \strokec4 (\{\cb1 \
+\cb3             \cf11 \strokec11 "fulfillmentResponse"\cf4 \strokec4 : \{\cb1 \
+\cb3                 \cf11 \strokec11 "messages"\cf4 \strokec4 : [\cb1 \
+\cb3                     \{\cb1 \
+\cb3                         \cf11 \strokec11 "text"\cf4 \strokec4 : \{\cb1 \
+\cb3                             \cf11 \strokec11 "text"\cf4 \strokec4 : [\cf12 \strokec12 f\cf11 \strokec11 "Prima abbiamo visto che il sottotono della tua pelle \'e8 \cf12 \strokec12 \{\cf6 \strokec6 sottotono\cf12 \strokec12 \}\cf11 \strokec11 . \cf13 \strokec13 \\n\\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                      \cf8 \strokec8 +\cf4 \strokec4  \cf12 \strokec12 f\cf11 \strokec11 "Ora abbiamo stabilito che il tuo contrasto \'e8 \cf12 \strokec12 \{\cf6 \strokec6 contrasto\cf12 \strokec12 \}\cf11 \strokec11 . \cf13 \strokec13 \\n\cf11 \strokec11 "\cf4 \cb1 \strokec4 \
+\cb3                                      \cf8 \strokec8 +\cf4 \strokec4  \cf12 \strokec12 f\cf11 \strokec11 "Quindi, la tua stagione cromatica \'e8 \cf12 \strokec12 \{\cf6 \strokec6 stagione\cf12 \strokec12 \}\cf11 \strokec11 ."\cf4 \strokec4 ]\cb1 \
+\cb3                         \}\cb1 \
+\cb3                     \}\cb1 \
+\cb3                 ]\cb1 \
+\cb3             \}\cb1 \
+\cb3         \})\cb1 \
+\
+\cb3     \cf9 \strokec9 # Se non siamo ancora all'ultima domanda, restituiamo una risposta vuota\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 return\cf4 \strokec4  \cf7 \strokec7 jsonify\cf4 \strokec4 (\{\})\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb3 \strokec9 # avvio del server\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 if\cf4 \strokec4  \cf6 \strokec6 __name__\cf4 \strokec4  \cf8 \strokec8 ==\cf4 \strokec4  \cf11 \strokec11 '__main__'\cf4 \strokec4 :\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf6 \strokec6 app\cf4 \strokec4 .\cf7 \strokec7 run\cf4 \strokec4 (\cf6 \strokec6 debug\cf8 \strokec8 =\cf12 \strokec12 True\cf4 \strokec4 , \cf6 \strokec6 port\cf8 \strokec8 =\cf10 \strokec10 8080\cf4 \strokec4 )\cb1 \
+\
+}
