@@ -1,8 +1,4 @@
 from flask import Flask, request, jsonify
-from colorama import init, Fore, Style
-import math
-
-
 
 app = Flask(__name__)
 
